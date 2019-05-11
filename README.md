@@ -15,9 +15,16 @@ The HTML5 doctype is clean, short and easy to remember. It's used by a vast majo
 </html>
 ```
 
-## See also
+**See also:**
 
 * [Which doctype should you use in HTML emails?](https://emails.hteumeuleu.com/which-doctype-should-you-use-in-html-emails-cd323fdb793c)
+
+# Make it work without `<style>`
+
+Not every email clients support `<style>` tags. `<style>` tags filtering can be:
+
+* **Permanent**. For example, the Gmail Apps (on iOS and Android) with Non Gmail Accounts (also known as *GANGA*) don't support `<style>` tags. This also happens on a lot of international email clients like [Libero](http://www.libero.it/mail/) (in Italy), [Mail.ru](https://mail.ru/) or [Yandex](https://mail.yandex.com/) (in Russia), [Nate](http://home.mail.nate.com/) or [Naver](https://mail.naver.com/) (in Korea), [T‑online](https://freemail.t-online.de/) (in Germany), [Telstra](https://www.my.telstra.com.au/) (in Australia) or [Terra](https://mail.terra.com.br/) (in Brazil).
+* **Temporary**. In the past year, Gmail removed `<style>` tags for a day at least two times (on [2019/04/23](https://twitter.com/TaxiforEmail/status/1120645381669494785) and on [2018/07/13](https://twitter.com/HTeuMeuLeu/status/1017741221182263296)).
 
 # Styles over attributes
 
@@ -33,7 +40,7 @@ This is especially helpful in case an email client has strong default styles. Fo
 <td style="vertical-align:middle; text-align:center; background-color:#fff;"></td>
 ```
 
-## Exceptions
+**Exceptions:**
 
 1. The Outlook versions using Word's rendering engine (2007–2019 on Windows) don't understand `auto` as a value for `margin`. Thus, to center a `<table>`, it's best to have both the `align="center"` attribute and a `margin:0 auto` style.
 
@@ -56,9 +63,9 @@ This is especially helpful in case an email client has strong default styles. Fo
 
 # Use margin or padding for spacing
 
-Spacing around or inside elements should be done using themargin or padding properties in CSS. Empty `<td>`s and multiple `<br>`s must be avoided.
+Spacing around or inside elements should be done using the `margin` or `padding properties in CSS. Empty `<td>`s and multiple `<br>`s must be avoided.
 
-```
+```html
 <!-- Bad example -->
 <table role="presentation">
   <tr>
@@ -95,5 +102,4 @@ Avoid splitting an image into multiple files. This is important for several reas
 * **Performance**. Just like on the Web, The fewer HTTP requests the better. Downloading a single 50 Kb image is theoretically faster than downloading five 10 Kb images.
 * **Accessibility**. A single image will let you define a single clean alt text, and style it in case images aren't visible.
 * **WebKit** adds small thin lines between images when using a CSS transform on a whole email. This is something used by numerous email clients to adjust the rendering of non responsive emails on smaller screens. The current version of Outlook.com uses a CSS transform to adjust the display of an email within its preview pane. On Chrome or Safari, this results in thin lines between split images like in [this example](https://cdn-images-1.medium.com/max/2400/1*2CHIjuhc9JSmpNjoSQl3aw.jpeg).
-
 * **Shit happens**. Email clients or user preferences may change how your email look, making your content larger than expected and your images alignement change. You don't want [this](https://imgur.com/NhoEN) to happen.
