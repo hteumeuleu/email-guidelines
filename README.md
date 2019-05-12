@@ -2,7 +2,7 @@
 
 This document aims to address several principles you can apply to code HTML emails. This is done in the spirit of @mdo's [Code Guide](https://www.github.com/mdo/code-guide/), @necolas's [Idiomatic CSS](https://www.github.com/necolas/idiomatic-css), @bendc's [Frontend Guidelines](https://www.github.com/bendc/frontend-guidelines) or Stack Overflow's [Email Guidelines](https://www.stackoverflow.design/email/guidelines/).
 
-# HTML5 doctype
+## HTML5 doctype
 
 The HTML5 doctype is clean, short and easy to remember. It's used by a vast majority of email clients, so your code will inherit it anyway. Just be aware that some other email clients might use other doctypes and your email might end up being rendered in [Quirks Mode](https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode).
 
@@ -19,7 +19,7 @@ The HTML5 doctype is clean, short and easy to remember. It's used by a vast majo
 
 * [Which doctype should you use in HTML emails?](https://emails.hteumeuleu.com/which-doctype-should-you-use-in-html-emails-cd323fdb793c)
 
-# Semantic markup
+## Semantic markup
 
 The HTML code of an email should use as much semantic markup as possible. The use of `<h1>` to `<h6>` headings as well the use of `<p>` for paragraphs is greatly recommended. 
 
@@ -47,7 +47,7 @@ But even on *the Outlooks*, the use of presentational tables should be limited t
 * Setting a `background-color` or a `border` style.
 
 
-# Make it work without `<style>`
+## Make it work without `<style>`
 
 Not every email clients support `<style>` tags. `<style>` tags filtering can be:
 
@@ -61,7 +61,7 @@ Not every email clients support `<style>` tags. `<style>` tags filtering can be:
 * **Layout**. An email without `<style>` should adjust to any width without horizontal scroll. I usually consider to go as low as 280px wide which reflects the width an email viewed on Gmail on an iPhone SE.
 * **Branding**. An email without `<style>` should reflect the branding of the sender.
 
-# Styles over attributes
+## Styles over attributes
 
 Prefer using styles properties instead of HTML attributes. This helps bring together presentational code into a single style attribute instead of multiple attributes. With some exceptions, avoid attributes like `width`, `height`, `align`, `valign`, `border`, `color` or `bgcolor`.
 
@@ -115,7 +115,7 @@ This is especially helpful in case an email client has strong default styles. Fo
 ```
 
 
-# Use `margin` or `padding` for spacing
+## Use `margin` or `padding` for spacing
 
 Spacing around or inside elements should be done using the `margin` or `padding` properties in CSS. Empty `<td>`s and multiple `<br>`s must be avoided.
 
@@ -151,7 +151,7 @@ Spacing around or inside elements should be done using the `margin` or `padding`
 
 One caveats of this is that in *the Outlooks* (2007-2019 on Windows), the combination of `margin` and `background-color` behaves differently than in the CSS specification. Mainly, the background color is visible in the margin area as well.
 
-# Don't split visuals
+## Don't split visuals
 
 Avoid splitting an image into multiple files. This is important for several reasons:
 
