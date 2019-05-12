@@ -7,7 +7,6 @@ This document aims to address several principles you can apply to code HTML emai
 The HTML5 doctype is clean, short and easy to remember. It's used by a vast majority of email clients, so your code will inherit it anyway. Just be aware that some other email clients might use other doctypes and your email might end up being rendered in [Quirks Mode](https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode).
 
 ```html
-<!-- Good example -->
 <!DOCTYPE html>
 <html lang="en">
   <head></head>
@@ -82,6 +81,7 @@ This is especially helpful in case an email client has strong default styles. Fo
 ```html
 <!-- Bad example -->
 <table align="center" width="600" role="presentation">…</table>
+
 <!-- Good example -->
 <table align="center" style="margin:0 auto; width:600px;" role="presentation">…</table>
 ```
