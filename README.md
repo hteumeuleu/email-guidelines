@@ -19,12 +19,47 @@ The HTML5 doctype is clean, short and easy to remember. It's used by a vast majo
 
 * [Which doctype should you use in HTML emails?](https://emails.hteumeuleu.com/which-doctype-should-you-use-in-html-emails-cd323fdb793c)
 
+# Semantic markup
+
+The HTML code of an email should use as much semantic markup as possible. The use of `<h1>` to `<h6>` headings as well the use of `<p>` for paragraphs is greatly recommended. 
+
+```html
+<!-- Bad example -->
+<font face="Arial" size="5" color="#00ff00">Lorem ipsum</font>
+
+<!-- Good example -->
+<h1 style="margin:0; color:#0f0; font:24px Arial, sans-serif;">Lorem ipsum</h1>
+```
+
+Container tags such as `<header>`, `<main>`, `<footer>`, `<article>` or `<section>` are to use with caution as several major email clients (like Gmail or Outlook.com) don't support them.
+
+Presentational tables are unfortunately still required, but only for *the Outlooks* (2007-2019 on Windows). For better accessibility, every presentational table should always include the `role="presentation"`.
+
+```html
+<!-- Good example -->
+<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+```
+
+But even on *the Outlooks*, the use of presentational tables should be limited to the following exceptions for a consistent rendering:
+
+* Setting a fixed width on an element (using `<table style="width:600px">`).
+* Setting two elements side by side (using two siblings `<td>`).
+* Setting a `background-color` or a `border` style.
+
+
 # Make it work without `<style>`
 
 Not every email clients support `<style>` tags. `<style>` tags filtering can be:
 
 * **Permanent**. For example, the Gmail Apps (on iOS and Android) with Non Gmail Accounts (also known as *GANGA*) don't support `<style>` tags. This also happens on a lot of international email clients like [Libero](http://www.libero.it/mail/) (in Italy), [Mail.ru](https://mail.ru/) or [Yandex](https://mail.yandex.com/) (in Russia), [Nate](http://home.mail.nate.com/) or [Naver](https://mail.naver.com/) (in Korea), [T‑online](https://freemail.t-online.de/) (in Germany), [Telstra](https://www.my.telstra.com.au/) (in Australia) or [Terra](https://mail.terra.com.br/) (in Brazil).
 * **Temporary**. In the past year, Gmail removed `<style>` tags for a day at least two times (on [2019/04/23](https://twitter.com/TaxiforEmail/status/1120645381669494785) and on [2018/07/13](https://twitter.com/HTeuMeuLeu/status/1017741221182263296)).
+* **Contextual**. When you forward an email in the desktop webmail of Gmail, all `<style>` tags are removed. Gmail is also known for removing `<style>` tags when an email is viewed in its *unclipped* version. (See also: [Gmail removes `<style>` tags in non clipped view](https://github.com/hteumeuleu/email-bugs/issues/56).)
+* **Buggy**. The Yahoo app on Android removes `<style>` tags inside the first `<head>` of your page. (See also: [Yahoo! Mail app for Android strips styles from the first `<head>` tag](https://github.com/hteumeuleu/email-bugs/issues/28).)
+
+"*Making an email work*" without `<style>` can mean a lot of different things. But I think first and foremost about:
+
+* **Layout**. An email without `<style>` should adjust to any width without horizontal scroll. I usually consider to go as low as 280px wide which reflects the width an email viewed on Gmail on an iPhone SE.
+* **Branding**. An email without `<style>` should reflect the branding of the sender.
 
 # Styles over attributes
 
@@ -61,9 +96,28 @@ This is especially helpful in case an email client has strong default styles. Fo
 <img src="example.jpg" alt="" width="600" style="width:100%;" />
 ```
 
-# Use margin or padding for spacing
+3. Resetting `border`, `cellpadding` and `cellspacing` on a `<table>`. I find the CSS way to reset those styles on a `<table>` cumbersome for emails and prefer using the HTML attributes instead.
 
-Spacing around or inside elements should be done using the `margin` or `padding properties in CSS. Empty `<td>`s and multiple `<br>`s must be avoided.
+```html
+<!-- Bad-ish example -->
+<table style="border:0; border-spacing:0;">
+	<tr>
+		<td style="padding:0; border:none;">Lorem ipsum.</td>
+	</tr>
+</table>
+
+<!-- Good-ish example -->
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>Lorem ipsum.</td>
+	</tr>
+</table>
+```
+
+
+# Use `margin` or `padding` for spacing
+
+Spacing around or inside elements should be done using the `margin` or `padding` properties in CSS. Empty `<td>`s and multiple `<br>`s must be avoided.
 
 ```html
 <!-- Bad example -->
@@ -94,6 +148,8 @@ Spacing around or inside elements should be done using the `margin` or `padding 
   </tr>
 </table>
 ```
+
+One caveats of this is that in *the Outlooks* (2007-2019 on Windows), the combination of `margin` and `background-color` behaves differently than in the CSS specification. Mainly, the background color is visible in the margin area as well.
 
 # Don't split visuals
 
