@@ -19,6 +19,7 @@ The HTML5 doctype is clean, short and easy to remember. It's used by a vast majo
 * [Which doctype should you use in HTML emails?](https://emails.hteumeuleu.com/which-doctype-should-you-use-in-html-emails-cd323fdb793c)
 
 ## Semantic markup
+    <div lang="en">
 
 The HTML code of an email should use as much semantic markup as possible. The use of `<h1>` to `<h6>` headings as well the use of `<p>` for paragraphs is greatly recommended. 
 
