@@ -1,6 +1,8 @@
 # Email Coding Guidelines
 
-This document aims to address several principles you can apply to code HTML emails. This is done in the spirit of @mdo's [Code Guide](https://www.github.com/mdo/code-guide/), @necolas's [Idiomatic CSS](https://www.github.com/necolas/idiomatic-css), @bendc's [Frontend Guidelines](https://www.github.com/bendc/frontend-guidelines) or Stack Overflow's [Email Guidelines](https://www.stackoverflow.design/email/guidelines/).
+This document aims to address several principles you can apply to code HTML emails. Each guideline is objectively vindicated to comply with modern email clients and with graceful degradation in mind for others.
+
+This is a living document and new ideas are more than welcome. Feel free to contribute.
 
 ## HTML5 doctype
 
@@ -8,7 +10,7 @@ The HTML5 doctype is clean, short and easy to remember. It's used by a vast majo
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head></head>
   <body></body>
 </html>
@@ -18,10 +20,27 @@ The HTML5 doctype is clean, short and easy to remember. It's used by a vast majo
 
 * [Which doctype should you use in HTML emails?](https://emails.hteumeuleu.com/which-doctype-should-you-use-in-html-emails-cd323fdb793c)
 
-## Semantic markup
-    <div lang="en">
+## Lang
 
-The HTML code of an email should use as much semantic markup as possible. The use of `<h1>` to `<h6>` headings as well the use of `<p>` for paragraphs is greatly recommended. 
+Defining the `lang` of the HTML content helps assistive technologies like screen readers to pick the right voice to read the content. The `lang` attribute needs to be defined with a valid [language tag](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) on the `<html>` opening tag. But because some email clients (especially webmails) remove the `<html>` element, the `lang` attribute also needs to be set on a wrapping element within the `<body>`.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head></head>
+  <body>
+    <div lang="en">
+    </div>
+  </body>
+</html>
+```
+**See also:**
+
+* [Email accessibility in action](https://emails.hteumeuleu.com/email-accessibility-in-action-f7f9d945cf67#1592)
+
+## Semantic text markup
+
+The HTML code of an email should use as much semantic markup as possible. The use of `<h1>` to `<h6>` headings as well the use of `<p>` for paragraphs is greatly recommended.
 
 ```html
 <!-- Bad example -->
@@ -31,9 +50,11 @@ The HTML code of an email should use as much semantic markup as possible. The us
 <h1 style="margin:0; color:#0f0; font:24px Arial, sans-serif;">Lorem ipsum</h1>
 ```
 
-Container tags such as `<header>`, `<main>`, `<footer>`, `<article>` or `<section>` are to use with caution as several major email clients (like Gmail or Outlook.com) don't support them.
+Container tags such as `<header>`, `<main>`, `<footer>`, `<article>` or `<section>` are to use with caution as several major email clients (like Gmail or Outlook.com) don't support them. These are preferred to be replaced by `role` attributes instead.
 
-Presentational tables are unfortunately still required, but only for *the Outlooks* (2007-2019 on Windows). For better accessibility, every presentational table should always include the `role="presentation"`.
+## Tables for layout
+
+Presentational tables are unfortunately still required, but only for *the Outlooks* (2007-2019 on Windows). For better accessibility, every presentational table should always include the `role="presentation"` attribute.
 
 ```html
 <!-- Good example -->
@@ -45,6 +66,21 @@ But even on *the Outlooks*, the use of presentational tables should be limited t
 * Setting a fixed width on an element (using `<table style="width:600px">`).
 * Setting two elements side by side (using two siblings `<td>`).
 * Setting a `background-color` or a `border` style.
+
+And because the `role="presentation"` might still be removed by email clients (for example in Yahoo! Mail or AOL), it is even better to include presentational tables only in conditional comments for Outlook.
+
+```html
+<!--[if mso]>
+<table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td>
+<![endif]-->
+<div>
+</div>
+<!--[if mso]>
+</td></tr></table>
+<![endif]-->
+```
+
+The single `[if mso]` condition is enough to target all versions of Outlook using Word's rendering engine (aka *the Outlooks* from 2007 to 2019 on Windows). Unless there's a very specific need, the use of Outlook version targeting (like `[if mso gte 16]`) is greatly discouraged.
 
 
 ## Make it work without `<style>`
@@ -160,3 +196,13 @@ Avoid splitting an image into multiple files. This is important for several reas
 * **Accessibility**. A single image will let you define a single clean alt text, and style it in case images aren't visible.
 * **WebKit** adds small thin lines between images when using a CSS transform on a whole email. This is something used by numerous email clients to adjust the rendering of non responsive emails on smaller screens. The current version of Outlook.com uses a CSS transform to adjust the display of an email within its preview pane. On Chrome or Safari, this results in thin lines between split images like in [this example](https://cdn-images-1.medium.com/max/2400/1*2CHIjuhc9JSmpNjoSQl3aw.jpeg).
 * **Shit happens**. Email clients or user preferences may change how your email look, making your content larger than expected and your images alignement change. You don't want [this](https://imgur.com/NhoEN) to happen.
+
+## Acknowledgements
+
+This guide is done in the spirit of @mdo's [Code Guide](https://www.github.com/mdo/code-guide/), @necolas's [Idiomatic CSS](https://www.github.com/necolas/idiomatic-css), @bendc's [Frontend Guidelines](https://www.github.com/bendc/frontend-guidelines) or Stack Overflow's [Email Guidelines](https://www.stackoverflow.design/email/guidelines/).
+
+## License
+
+*Email Coding Guidelines* by Rémi Parmentier (@HTeuMeuLeu) is licensed under the MIT License. This applies to all documents and translations in this repository.
+
+Based on a work at github.com/hteumeuleu/email-guidelines.
