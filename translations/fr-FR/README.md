@@ -189,7 +189,7 @@ Créer des espacements autour ou à l'intérieur d'éléments devrait être fait
 
 Un inconvénient de ça est que dans *les Outlook* (2007 à 2019 sur Windows), la combinaison de `margin` et `background-color` se comporte différemment de la spécification CSS. La couleur de fond se retrouve ainsi visible dans la zone de marge.
 
-## Ne découper pas les images
+## Ne pas découper les images
 
 Évitez de découper des images en plusieurs fichiers. C'est important pour plusieurs raisons :
 
