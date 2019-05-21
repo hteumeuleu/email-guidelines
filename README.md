@@ -197,6 +197,42 @@ Avoid splitting an image into multiple files. This is important for several reas
 * **WebKit** adds small thin lines between images when using a CSS transform on a whole email. This is something used by numerous email clients to adjust the rendering of non responsive emails on smaller screens. The current version of Outlook.com uses a CSS transform to adjust the display of an email within its preview pane. On Chrome or Safari, this results in thin lines between split images like in [this example](https://cdn-images-1.medium.com/max/2400/1*2CHIjuhc9JSmpNjoSQl3aw.jpeg).
 * **Shit happens**. Email clients or user preferences may change how your email look, making your content larger than expected and your images alignement change. You don't want [this](https://imgur.com/NhoEN) to happen.
 
+## Support Outlook at 120 dpi
+
+On certain Windows configurations, *the Outlooks* (2007-2019 on Windows) applies DPI scaling on emails. To prevent altered scaling, you need to apply the three following rules:
+
+1. Add the Microsoft Office namespace on the `<html>` element.
+
+```html
+<html xmlns:o="urn:schemas-microsoft-com:office:office">
+```
+
+2. Add the following `OfficeDocumentSettings` declaration inside the `<head>` element.
+
+```html
+<!--[if mso]>
+<xml>
+  <o:OfficeDocumentSettings>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+```
+
+3. Always use dimensions defined in CSS instead of HTML attributes.
+
+```html
+<!-- Bad example -->
+<table align="center" role="presentation" width="600">…</table>
+
+<!-- Good example -->
+<table align="center" role="presentation" style="width:600px;">…</table>
+```
+
+**See also:**
+
+* [Correcting Outlook DPI Scaling Issues](https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/) by Courtney Fantinato.
+
 ## Acknowledgements
 
 This guide is done in the spirit of @mdo's [Code Guide](https://www.github.com/mdo/code-guide/), @necolas's [Idiomatic CSS](https://www.github.com/necolas/idiomatic-css), @bendc's [Frontend Guidelines](https://www.github.com/bendc/frontend-guidelines) or Stack Overflow's [Email Guidelines](https://www.stackoverflow.design/email/guidelines/).

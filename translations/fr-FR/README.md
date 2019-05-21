@@ -198,6 +198,42 @@ Un inconvénient de ça est que dans *les Outlook* (2007 à 2019 sur Windows), l
 * **WebKit** ajoute de fins espaces entre les images lorsqu'une transformation CSS est utilisée sur un e‑mail. C'est quelque chose que font plusieurs clients de messagerie pour ajuster le rendu d'e‑mails non responsive sur des petits écrans. Par exemple, la version actuelle de Outlook.com utilise une transformation CSS pour ajuster l'affichage dans un e‑mail dans sa zone de visualisation. Sur Chrome et Safari, cela résulte en de fins espaces entre les images comme dans [cet exemple](https://cdn-images-1.medium.com/max/2400/1*2CHIjuhc9JSmpNjoSQl3aw.jpeg).
 * Parce que **c'est la vie**. Les clients de messagerie ou les préférences utilisateurs peuvent changer le rendu de votre e‑mail, rendant votre contenu plus large que prévu et modifiant alors l'alignement de vos images. Vous n'avez pas envie que [ce genre de choses](https://imgur.com/NhoEN) arrive.
 
+## Supporter Outlook à 120 dpi
+
+Sur certaines configurations de Windows, *les Outlooks* (2007 à 2019 sur Windows) appliquent une mise à l'échelle des e-mails. Pour éviter des différences de rendu lors de la mise à l'échelle, vous devez appliquer les trois règles suivantes :
+
+1. Ajouter l'espace de nom de Microsoft Office sur l'élément `<html>`.
+
+```html
+<html xmlns:o="urn:schemas-microsoft-com:office:office">
+```
+
+2. Ajouter la déclaration `OfficeDocumentSettings` suivante dans l'élément `<head>`.
+
+```html
+<!--[if mso]>
+<xml>
+  <o:OfficeDocumentSettings>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+```
+
+3. Toujours utiliser des dimensions définies en CSS plutôt que dans des attributs HTML.
+
+```html
+<!-- Mauvais exemple -->
+<table align="center" role="presentation" width="600">…</table>
+
+<!-- Bon exemple -->
+<table align="center" role="presentation" style="width:600px;">…</table>
+```
+
+**See also:**
+
+* [Correcting Outlook DPI Scaling Issues](https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/) by Courtney Fantinato.
+
 ## Remerciements
 
 Ce guide est inspiré de [Code Guide](https://www.github.com/mdo/code-guide/) par @mdo, [Idiomatic CSS](https://www.github.com/necolas/idiomatic-css) par @necolas, [Frontend Guidelines](https://www.github.com/bendc/frontend-guidelines) par @bendc ou [Email Guidelines](https://www.stackoverflow.design/email/guidelines/) de Stack Overflow.
