@@ -65,7 +65,7 @@ But even on *the Outlooks*, the use of presentational tables should be limited t
 
 * Setting a fixed width on an element (using `<table style="width:600px">`).
 * Setting two elements side by side (using two siblings `<td>`).
-* Setting a `background-color` or a `border` style.
+* Setting a `padding`, `background-color` or a `border` style.
 
 And because the `role="presentation"` might still be removed by email clients (for example in Yahoo! Mail or AOL), it is even better to include presentational tables only in conditional comments for Outlook.
 
