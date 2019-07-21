@@ -67,7 +67,7 @@ Mais même sur *les Outlook*, l'utilisation de tableaux de mise en page doit êt
 
 * Définir une largeur fixe sur un élément (en utilisant `<table style="width:600px">`).
 * Positionner deux éléments côte à côte (en utilisant deux `<td>` adjacents).
-* Définir des styles `background-color` ou `border`.
+* Définir des styles `padding`, `background-color` ou `border`.
 
 Et parce que l'attribut `role="presentation"` peut être supprimé par les clients de messagerie (par exemple dans Yahoo! Mail ou AOL), il est de meilleur usage d'inclure les tableaux de mise en page dans des commentaires conditionnels pour Outlook.
 
