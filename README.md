@@ -151,6 +151,16 @@ This is especially helpful in case an email client has strong default styles. Fo
 </table>
 ```
 
+4. Setting `height`. The `height` property in CSS is turned into `min-height` in every Yahoo! Mail and AOL clients. (See also: [Yahoo converts the height property to min-height](https://github.com/hteumeuleu/email-bugs/issues/9).) Using the HTML `height` attribute instead is a safer bet.
+
+```html
+<!-- Bad example -->
+<td style="height:100px;">Lorem ipsum.</td>
+
+<!-- Good example -->
+<td height="100">Lorem ipsum.</td>
+```
+
 
 ## Use `margin` or `padding` for spacing
 

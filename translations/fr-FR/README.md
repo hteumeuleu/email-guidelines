@@ -152,6 +152,15 @@ C'est particulièrement utilise dans le cas où un client de messagerie a des st
 </table>
 ```
 
+4. Définir une hauteur avec `height`. La propriété `height` en CSS est transformée en `min-height` dans tous les clients de Yahoo! Mail et AOL. (Voir aussi : [Yahoo transforme la propriété height en min-height](https://github.com/hteumeuleu/email-bugs/issues/9).) Utiliser l'attribut HTML `height` à la place s'avère une solution plus fiable.
+
+```html
+<!-- Bad example -->
+<td style="height:100px;">Lorem ipsum.</td>
+
+<!-- Good example -->
+<td height="100">Lorem ipsum.</td>
+```
 
 ## Utiliser `margin` ou `padding` pour des espacements
 
