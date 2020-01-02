@@ -150,16 +150,16 @@ This is especially helpful in case an email client has strong default styles. Fo
 ```html
 <!-- Bad-ish example -->
 <table style="border:0; border-spacing:0;">
-  <tr>
-    <td style="padding:0; border:none;">Lorem ipsum.</td>
-  </tr>
+	<tr>
+		<td style="padding:0; border:none;">Lorem ipsum.</td>
+	</tr>
 </table>
 
 <!-- Good-ish example -->
 <table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td>Lorem ipsum.</td>
-  </tr>
+	<tr>
+		<td>Lorem ipsum.</td>
+	</tr>
 </table>
 ```
 
