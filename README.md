@@ -50,7 +50,19 @@ The HTML code of an email should use as much semantic markup as possible. The us
 <h1 style="margin:0; color:#0f0; font:24px Arial, sans-serif;">Lorem ipsum</h1>
 ```
 
-Container tags such as `<header>`, `<main>`, `<footer>`, `<article>` or `<section>` are to use with caution as several major email clients (like Gmail or Outlook.com) don't support them. These are preferred to be replaced by `role` attributes instead.
+Container tags such as `<header>`, `<main>`, `<footer>`, `<article>` or `<section>` are to be used with caution as several major email clients (like Gmail or Outlook.com) don't support them. It is preferred to use the corresponding [implicit ARIA `role`](https://www.w3.org/TR/html-aria/#implicit) of the given element instead.
+
+```html
+<!-- Bad example -->
+<header>
+  <h1>Lorem ipsum</h1>
+</header>
+
+<!-- Good example -->
+<div role="banner">
+  <h1>Lorem ipsum</h1>
+</div>
+```
 
 ## Tables for layout
 
