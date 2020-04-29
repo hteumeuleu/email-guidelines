@@ -1,12 +1,12 @@
 # Email Coding Guidelines
 
-This document aims to address several principles you can apply to code HTML emails. Each guideline is objectively vindicated to comply with modern email clients and with graceful degradation in mind for others.
+このドキュメントは、HTMLメールのコーディングに適用できるいくつかの原則に対処することを目的としています。各ガイドラインは、最新のメールクライアントに準拠し、その他のメールクライアントのグレースフルデグラデーション (上品な劣化) を念頭に置いて客観的に実証されています。    
 
-This is a living document and new ideas are more than welcome. Feel free to contribute.
+これは絶えず更新または編集される文書であり、新しいアイデアは大歓迎です。貢献してください。     
 
 ## HTML5 doctype
 
-The HTML5 doctype is clean, short and easy to remember. It's used by a vast majority of email clients, so your code will inherit it anyway. Just be aware that some other email clients might use other doctypes and your email might end up being rendered in [Quirks Mode](https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode).
+HTML5 doctype は簡潔で短く、覚えやすいものです。 大半のメールクライアントで使用されているので、コードではとにかく HTML5 doctype を使用します。 他のメールクライアントが、他の doctype だと解釈し、メールが[後方互換モード](https://developer.mozilla.org/ja/docs/Web/HTML/Quirks_Mode_and_Standards_Mode)でレンダリングされる可能性があることに注意してください。     
 
 ```html
 <!DOCTYPE html>
@@ -16,13 +16,13 @@ The HTML5 doctype is clean, short and easy to remember. It's used by a vast majo
 </html>
 ```
 
-**See also:**_
+**以下も参照してください:**
 
 * [Which doctype should you use in HTML emails?](https://emails.hteumeuleu.com/which-doctype-should-you-use-in-html-emails-cd323fdb793c)
 
 ## Lang
 
-Defining the `lang` of the HTML content helps assistive technologies like screen readers to pick the right voice to read the content. The `lang` attribute needs to be defined with a valid [language tag](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) on the `<html>` opening tag. But because some email clients (especially webmails) remove the `<html>` element, the `lang` attribute also needs to be set on a wrapping element within the `<body>`.
+HTML コンテンツの`lang`を定義すると、スクリーンリーダーなどの支援技術が適切な音声を選んでコンテンツを読むのに役立ちます。`lang`属性は、` <html> `開始タグで有効な[言語タグ](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry)を使用して定義する必要があります。ただし、一部のメールクライアント(特にウェブメール)は`<html>`要素を削除するため、`<body>`内の折り返し要素に`lang`属性も設定する必要があります。    
 
 ```html
 <!DOCTYPE html>
@@ -34,31 +34,31 @@ Defining the `lang` of the HTML content helps assistive technologies like screen
   </body>
 </html>
 ```
-**See also:**
+**以下も参照してください:**
 
 * [Email accessibility in action](https://emails.hteumeuleu.com/email-accessibility-in-action-f7f9d945cf67#1592)
 
 ## Semantic text markup
 
-The HTML code of an email should use as much semantic markup as possible. The use of `<h1>` to `<h6>` headings as well the use of `<p>` for paragraphs is greatly recommended.
+電子メールの HTML コードは、可能な限り多くのセマンティックマークアップを使用する必要があります。`<h1>`から`<h6>`までの見出しの使用と、段落に`<p>`を使用することを強く推奨します。     
 
 ```html
-<!-- Bad example -->
+<!-- 悪い例 -->
 <font face="Arial" size="5" color="#00ff00">Lorem ipsum</font>
 
-<!-- Good example -->
+<!-- 良い例 -->
 <h1 style="margin:0; color:#0f0; font:24px Arial, sans-serif;">Lorem ipsum</h1>
 ```
 
-Container tags such as `<header>`, `<main>`, `<footer>`, `<article>` or `<section>` are to be used with caution as several major email clients (like Gmail or Outlook.com) don't support them. It is preferred to use the corresponding [implicit ARIA `role`](https://www.w3.org/TR/html-aria/#implicit) of the given element instead.
+`<header>`、`<main>`、`<footer>`、`<article>`、または`<section>`などのコンテナタグは、いくつかの主要な電子メールクライアント(GmailやOutlookなど)でサポートされていないため、注意して使用する必要があります。これらのコンテナタグの代わりに、指定したい要素の対応する[implicit ARIA `role`](https://momdo.github.io/html-aria/#implicit)を使用することを推奨します。     
 
 ```html
-<!-- Bad example -->
+<!-- 悪い例 -->
 <header>
   <h1>Lorem ipsum</h1>
 </header>
 
-<!-- Good example -->
+<!-- 良い例 -->
 <div role="banner">
   <h1>Lorem ipsum</h1>
 </div>
