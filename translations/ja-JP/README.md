@@ -66,20 +66,20 @@ HTML コンテンツの`lang`を定義すると、スクリーンリーダーな
 
 ## Tables for layout
 
-Presentational tables are unfortunately still required, but only for *the Outlooks* (2007-2019 on Windows). For better accessibility, every presentational table should always include the `role="presentation"` attribute.
+プレゼンテーションテーブルは残念ながらまだ必要ですが、*Outlook*（Windowsの2007-2019）の場合のみです。アクセシビリティを向上させるために、すべてのプレゼンテーションテーブルには常に`role ="presentation"`属性を含める必要があります。    
 
 ```html
 <!-- Good example -->
 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
 ```
 
-But even on *the Outlooks*, the use of presentational tables should be limited to the following exceptions for a consistent rendering:
+ただし、*Outlook*でも、プレゼンテーションテーブルの使用は、一貫したレンダリングのために次の例外に限定する必要があります。    
 
-* Setting a fixed width on an element (using `<table style="width:600px">`).
-* Setting two elements side by side (using two siblings `<td>`).
-* Setting a `padding`, `background-color` or a `border` style.
+* 要素に固定幅を設定する(`<table style ="width:600px">`を使用する等)。    
+* 2つの要素を並べて設定する(2つの連なった`<td>`を使用する等)。
+* `padding`、`background-color`、または `border`をスタイルとして設定します。    
 
-And because the `role="presentation"` might still be removed by email clients (for example in Yahoo! Mail or AOL), it is even better to include presentational tables only in conditional comments for Outlook.
+また、`role="presentation"`はメールクライアント(Yahoo! MailやAOLなど)によって削除される可能性があるため、Outlookの条件付きコメントにのみプレゼンテーションテーブルを含めることをを推奨します。        
 
 ```html
 <!--[if mso]>
@@ -92,8 +92,7 @@ And because the `role="presentation"` might still be removed by email clients (f
 <![endif]-->
 ```
 
-The single `[if mso]` condition is enough to target all versions of Outlook using Word's rendering engine (aka *the Outlooks* from 2007 to 2019 on Windows). Unless there's a very specific need, the use of Outlook version targeting (like `[if mso gte 16]`) is greatly discouraged.
-
+単一の`[if mso]`の条件式は、Word のレンダリングエンジン(Windowsでは2007年から2019年までの*Outlook*)を使用して Outlook のすべてのバージョンをターゲットにするには十分です。特に必要がない限り、Outlook のバージョンターゲティング(`[if mso gte 16]`等)の使用はお勧めしません。     
 
 ## Make it work without `<style>`
 
