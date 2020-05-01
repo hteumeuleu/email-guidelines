@@ -96,41 +96,43 @@ HTML コンテンツの`lang`を定義すると、スクリーンリーダーな
 
 ## Make it work without `<style>`
 
-Not every email clients support `<style>` tags. `<style>` tags filtering can be:
+すべてのメールクライアントが`<style>`タグをサポートしているわけではありません。`<style>`タグのフィルタリングには次のものがあります。     
 
-* **Permanent**. For example, the Gmail Apps (on iOS and Android) with Non Gmail Accounts (also known as *GANGA*) don't support `<style>` tags. This also happens on a lot of international email clients like [Libero](http://www.libero.it/mail/) (in Italy), [Mail.ru](https://mail.ru/) or [Yandex](https://mail.yandex.com/) (in Russia), [Nate](http://home.mail.nate.com/) or [Naver](https://mail.naver.com/) (in Korea), [T‑online](https://freemail.t-online.de/) (in Germany), [Telstra](https://www.my.telstra.com.au/) (in Australia) or [Terra](https://mail.terra.com.br/) (in Brazil).
-* **Temporary**. In the past year, Gmail removed `<style>` tags for a day at least two times (on [2019/04/23](https://twitter.com/TaxiforEmail/status/1120645381669494785) and on [2018/07/13](https://twitter.com/HTeuMeuLeu/status/1017741221182263296)).
-* **Contextual**. When you forward an email in the desktop webmail of Gmail, all `<style>` tags are removed. Gmail is also known for removing `<style>` tags when an email is viewed in its *unclipped* version. (See also: [Gmail removes `<style>` tags in non clipped view](https://github.com/hteumeuleu/email-bugs/issues/56).)
-* **Buggy**. The Yahoo app on Android removes `<style>` tags inside the first `<head>` of your page. (See also: [Yahoo! Mail app for Android strips styles from the first `<head>` tag](https://github.com/hteumeuleu/email-bugs/issues/28).)
+ * **Permanent**. たとえば、Gmail以外のアカウント(*GANGA*とも呼ばれる)を使用する(iOSおよびAndroid上の)Gmail アプリは、`<style>`タグをサポートしません。この挙動となるMailアカウントは、[Libero](http://www.libero.it/mail/)(イタリア)、[Mail.ru](https://mail.ru/)または[Yandex](https://mail.yandex.com/)(ロシア)、[Nate])(http://home.mail.nate.com/)または[Naver])(https://mail.naver.com/)(韓国)、[T‑online](https://freemail.t-online.de/)(ドイツ)、[Telstra](https://www.my.telstra.com.au/) (オーストラリア)、または[Terra](https://mail.terra.com.br/)(ブラジル)です。     
+* **Temporary**. 昨年、Gmail は1日に少なくとも2回（[2019/04/23](https://twitter.com/TaxiforEmail/status/1120645381669494785)と[2018/07/13](https://twitter.com/HTeuMeuLeu/status/1017741221182263296)に)`<style>`タグを削除しました。
+* **Contextual**. Gmail のデスクトップウェブメールでメールを転送すると、すべての `<style>`タグが削除されます。 Gmail は、メールが*クリップされていない*バージョンで表示されたときに `<style>`タグを削除することでも知られています。(参照: [Gmail removes `<style>` tags in non clipped view](https://github.com/hteumeuleu/email-bugs/issues/56))
+* **Buggy**. Android の Yahoo アプリは、ページの最初の`<head>`内の`<style>`タグを削除します。(参照：[Yahoo! Mail app for Android strips styles from the first `<head>` tag](https://github.com/hteumeuleu/email-bugs/issues/28))
 
-"*Making an email work*" without `<style>` can mean a lot of different things. But I think first and foremost about:
+`<style>`を使用しないで*メールを作成する*ことには、さまざまな意味があります。しかし、何よりもまず以下を考えます。
 
-* **Layout**. An email without `<style>` should adjust to any width without horizontal scroll. I usually consider to go as low as 280px wide which reflects the width an email viewed on Gmail on an iPhone SE.
-* **Branding**. An email without `<style>` should reflect the branding of the sender.
+* **Layout**. `<style>`のない電子メールは、水平スクロールなしで任意の幅に調整する必要があります。通常、iPhone SEの Gmail で表示されるメールの幅を反映して、幅 280px をまで狭くすることを検討します。　　　　　
+
+* **Branding**. `<style>`のないメールは送信者のブランドを反映する必要があります。
 
 ## Styles over attributes
 
-Prefer using styles properties instead of HTML attributes. This helps bring together presentational code into a single style attribute instead of multiple attributes. With some exceptions, avoid attributes like `width`, `height`, `align`, `valign`, `border`, `color` or `bgcolor`.
+HTML属性ではなくスタイルプロパティを使用することを推奨します。これにより、プレゼンテーションコードを複数の属性ではなく1つのスタイル属性にまとめることができます。いくつかの例外を除いて、`width`、`height`、`align`、` valign`、`border`、`color`、または`bgcolor`などの属性は避けてください。    
 
-This is especially helpful in case an email client has strong default styles. For example, the desktop webmail of french provider Orange has the following rule, `td { vertical-align:top; }`, taking over any `valign` attribute in HTML. (See also: [Orange's default styles](https://github.com/hteumeuleu/email-bugs/issues/48).)
+これは、メールクライアントに強力なデフォルトスタイルがある場合に特に役立ちます。 たとえば、フランスのプロバイダーOrangeのデスクトップウェブメールには、デフォルトのレイアウト`td { vertical-align:top; }`が適用され、HTMLはこの `valign`属性を引き継ぎます。(参照: [Orange's default styles](https://github.com/hteumeuleu/email-bugs/issues/48))     
+
 
 ```html
-<!-- Bad example -->
+<!-- 悪い例 -->
 <td valign="middle" align="center" bgcolor="#ffffff"></td>
 
-<!-- Good example -->
+<!-- 良い例 -->
 <td style="vertical-align:middle; text-align:center; background-color:#fff;"></td>
 ```
 
-**Exceptions:**
+**例外**
 
-1. The Outlook versions using Word's rendering engine (2007–2019 on Windows) don't understand `auto` as a value for `margin`. Thus, to center a `<table>`, it's best to have both the `align="center"` attribute and a `margin:0 auto` style.
+1. Word のレンダリングエンジンを使用する Outlook バージョン（Windowsの2007〜2019年）では、`auto`が`margin`の値として認識されません。したがって、`<table>`を中央揃えにするには、`align="center"`属性と`margin:0 auto`スタイルの両方を使用するのが最適です。    
 
 ```html
-<!-- Bad example -->
+<!-- 悪い例 -->
 <table align="center" width="600" role="presentation">…</table>
 
-<!-- Good example -->
+<!-- 良い例 -->
 <table align="center" style="margin:0 auto; width:600px;" role="presentation">…</table>
 ```
 
