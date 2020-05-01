@@ -126,7 +126,7 @@ HTML属性ではなくスタイルプロパティを使用することを推奨�
 
 **例外**
 
-1. Word のレンダリングエンジンを使用する Outlook バージョン（Windowsの2007〜2019年）では、`auto`が`margin`の値として認識されません。したがって、`<table>`を中央揃えにするには、`align="center"`属性と`margin:0 auto`スタイルの両方を使用するのが最適です。    
+1. Word のレンダリングエンジンを使用する Outlook バージョン（2007〜2019年のWindows）では、`auto`が`margin`の値として認識されません。したがって、`<table>`を中央揃えにするには、`align="center"`属性と`margin:0 auto`スタイルの両方を使用するのが最適です。    
 
 ```html
 <!-- 悪い例 -->
@@ -136,27 +136,27 @@ HTML属性ではなくスタイルプロパティを使用することを推奨�
 <table align="center" style="margin:0 auto; width:600px;" role="presentation">…</table>
 ```
 
-2. In *the Outlooks* (2007–2019 on Windows), setting a percentage width to an image doesn't make the image adjust to its parent's width, as you'd expect in CSS. It instead sets the image at the width of the physical file. So to create fluid and responsive images, we need both the HTML `width` attribute (to maintain a fixed width in Outlook) and a style (for other clients).
+2. *Outlook*（2007〜2019年のWindows)では、画像にパーセンテージの幅を設定しても、CSS で期待されるように、画像がその親の要素の幅に調整されません。代わりに画像ファイルの実際の幅を設定します。したがって、流動的でレスポンシブな画像を作成するには、HTML の`width`属性(Outlookで固定幅を維持するため)とスタイル(他のクライアント用)の両方が必要です。    
 
 ```html
-<!-- Bad example -->
+<!-- 悪い例 -->
 <img src="example.jpg" alt="" width="100%" />
 
-<!-- Good example -->
+<!-- 良い例 -->
 <img src="example.jpg" alt="" width="600" style="width:100%;" />
 ```
 
-3. Resetting `border`, `cellpadding` and `cellspacing` on a `<table>`. I find the CSS way to reset those styles on a `<table>` cumbersome for emails and prefer using the HTML attributes instead.
+3. `<table>`の `border`、`cellpadding`、および`cellspacing`をリセットします。CSSで `<table>`のスタイルをリセットする方法は電子メールでは扱いにくく、代わりに HTML 属性を使用することを推奨します。
 
 ```html
-<!-- Bad-ish example -->
+<!-- 悪い例 -->
 <table style="border:0; border-spacing:0;">
 	<tr>
 		<td style="padding:0; border:none;">Lorem ipsum.</td>
 	</tr>
 </table>
 
-<!-- Good-ish example -->
+<!-- 良い例 -->
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td>Lorem ipsum.</td>
@@ -164,23 +164,22 @@ HTML属性ではなくスタイルプロパティを使用することを推奨�
 </table>
 ```
 
-4. Setting `height`. The `height` property in CSS is turned into `min-height` in every Yahoo! Mail and AOL clients. (See also: [Yahoo converts the height property to min-height](https://github.com/hteumeuleu/email-bugs/issues/9).) Using the HTML `height` attribute instead is a safer bet.
+4. `height`を設定します。CSS の`height`プロパティは、すべての Yahoo! メールおよび AOL クライアントで`min-height`に変換されます。(参照:[Yahoo converts the height property to min-height](https://github.com/hteumeuleu/email-bugs/issues/9))代わりにHTMLの `height`属性を使用する方が安全です。     
 
 ```html
-<!-- Bad example -->
+<!-- 悪い例 -->
 <td style="height:100px;">Lorem ipsum.</td>
 
-<!-- Good example -->
+<!-- 良い例 -->
 <td height="100">Lorem ipsum.</td>
 ```
 
-
 ## Use `margin` or `padding` for spacing
 
-Spacing around or inside elements should be done using the `margin` or `padding` properties in CSS. Empty `<td>`s and multiple `<br>`s must be avoided.
+要素の周囲または内部の間隔は、CSSの`margin`または`padding`プロパティを使用して調整する必要があります。空の`<td>`と複数の`<br>`は避けるべきです。      
 
 ```html
-<!-- Bad example -->
+<!-- 悪い例 -->
 <table role="presentation">
   <tr>
     <td colspan="3" height="20"></td>
@@ -199,7 +198,7 @@ Spacing around or inside elements should be done using the `margin` or `padding`
   </tr>
 </table>
 
-<!-- Good example -->
+<!-- 良い例 -->
 <table role="presentation">
   <tr>
     <td style="padding:20px;">
@@ -209,28 +208,28 @@ Spacing around or inside elements should be done using the `margin` or `padding`
 </table>
 ```
 
-One caveats of this is that in *the Outlooks* (2007-2019 on Windows), the combination of `margin` and `background-color` behaves differently than in the CSS specification. Mainly, the background color is visible in the margin area as well.
+1つの注意点として、*Outlook*(2007-2019年のWindows)では、`margin` と `background-color` の組み合わせの動作が CSS 仕様とは異なるということです。主に、背景色もマージン領域で表示されます。    
 
 ## Don't split visuals
 
-Avoid splitting an image into multiple files. This is important for several reasons:
+画像を複数のファイルに分割しないでください。 これは以下の理由で重要です。     
 
-* **Performance**. Just like on the Web, The fewer HTTP requests the better. Downloading a single 50 Kb image is theoretically faster than downloading five 10 Kb images.
-* **Accessibility**. A single image will let you define a single clean alt text, and style it in case images aren't visible.
-* **WebKit** adds small thin lines between images when using a CSS transform on a whole email. This is something used by numerous email clients to adjust the rendering of non responsive emails on smaller screens. The current version of Outlook.com uses a CSS transform to adjust the display of an email within its preview pane. On Chrome or Safari, this results in thin lines between split images like in [this example](https://cdn-images-1.medium.com/max/2400/1*2CHIjuhc9JSmpNjoSQl3aw.jpeg).
-* **Shit happens**. Email clients or user preferences may change how your email look, making your content larger than expected and your images alignement change. You don't want [this](https://imgur.com/NhoEN) to happen.
+* **Performance**. Web と同じように、HTTP リクエストは少ないほど良いです。理論的には、単一の 50Kb イメージをダウンロードする方が、5つの 10Kb イメージをダウンロードするよりも高速です。
+* **Accessibility**. 1つの画像にすると、1つの代替テキストを定義し、画像が表示されない場合に備えてスタイルを設定できます。     
+* **WebKit** メール全体で CSS 変換を使用するときに、画像間に細い線を追加します。これは、小さな画面での応答のない電子メールのレンダリングを調整するために、多くの電子メールクライアントで使用されるテクニックです。Outlook.com の現在のバージョンでは、CSS変換を使用して、プレビューウィンドウ内の電子メールの表示を調整しています。Chrome または Safari では、[この例](https://cdn-images-1.medium.com/max/2400/1*2CHIjuhc9JSmpNjoSQl3aw.jpeg)のように、分割画像間に細い線が表示されます。   
+* **Shit happens**. メールクライアントまたはユーザー設定により、メールの外観が変更され、コンテンツが予想よりも大きくなり、画像の配置が変わる場合があります。 あなたは[これ](https://imgur.com/NhoEN)が起こることを望まないでしょう。
 
 ## Support Outlook at 120 dpi
 
-On certain Windows configurations, *the Outlooks* (2007-2019 on Windows) applies DPI scaling on emails. To prevent altered scaling, you need to apply the three following rules:
+特定の Windows 構成では、*Outlook*(2007-2019年のWindows)は電子メールに DPI スケーリングを適用します。 スケーリングの変更を防ぐには、次の3つのルールを適用する必要があります。    
 
-1. Add the Microsoft Office namespace on the `<html>` element.
+1. Microsoft Office の名前空間を `<html>`要素に追加します。       
 
 ```html
 <html xmlns:o="urn:schemas-microsoft-com:office:office">
 ```
 
-2. Add the following `OfficeDocumentSettings` declaration inside the `<head>` element.
+2. 次の `OfficeDocumentSettings` 宣言を`<head>` 要素内に追加します。
 
 ```html
 <!--[if mso]>
@@ -242,26 +241,26 @@ On certain Windows configurations, *the Outlooks* (2007-2019 on Windows) applies
 <![endif]-->
 ```
 
-3. Always use dimensions defined in CSS instead of HTML attributes.
+3. HTML 属性ではなく、CSS で定義された寸法を常に使用します。   
 
 ```html
-<!-- Bad example -->
+<!-- 悪い例 -->
 <table align="center" role="presentation" width="600">…</table>
 
-<!-- Good example -->
+<!-- 良い例 -->
 <table align="center" role="presentation" style="width:600px;">…</table>
 ```
 
-**See also:**
+**以下も参照してください:**
 
 * [Correcting Outlook DPI Scaling Issues](https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/) by Courtney Fantinato.
 
 ## Acknowledgements
 
-This guide is done in the spirit of @mdo's [Code Guide](https://www.github.com/mdo/code-guide/), @necolas's [Idiomatic CSS](https://www.github.com/necolas/idiomatic-css), @bendc's [Frontend Guidelines](https://www.github.com/bendc/frontend-guidelines) or Stack Overflow's [Email Guidelines](https://www.stackoverflow.design/email/guidelines/).
+このガイドは、@mdoの[[コーディングガイド by @mdo](http://kia-king.com/code-guide/)、@necolasの[idiomatic-css/translations/ja-JP at master · necolas/idiomatic-css](https://github.com/necolas/idiomatic-css/tree/master/translations/ja-JP)、@bendcの[Frontend Guidelines](https://www.github.com/bendc/frontend-guidelines)、 Stack Overflow の[Email Guidelines](https://www.stackoverflow.design/email/guidelines/)の推奨事項に基づいて作成されています。      
 
 ## License
 
-*Email Coding Guidelines* by Rémi Parmentier (@HTeuMeuLeu) is licensed under the MIT License. This applies to all documents and translations in this repository.
+Rémi Parmentier (@HTeuMeuLeu)が作成した*Email Coding Guidelines*は、MITライセンスです。これは、このリポジトリ内のすべてのドキュメントと翻訳に適用されます。      
+github.com/hteumeuleu/email-guidelinesでの作業に基づいています。       
 
-Based on a work at github.com/hteumeuleu/email-guidelines.
