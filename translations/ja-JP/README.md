@@ -1,6 +1,6 @@
 # Email Coding Guidelines
 
-このドキュメントは、HTMLメールのコーディングに適用できるいくつかの原則に対処することを目的としています。各ガイドラインは、最新のメールクライアントに準拠し、その他のメールクライアントのグレースフルデグラデーション (上品な劣化) を念頭に置いて客観的に実証されています。    
+このドキュメントは、HTML メールのコーディングに適用できるいくつかの原則に対処することを目的としています。各ガイドラインは、最新のメールクライアントに準拠し、その他のメールクライアントのグレースフルデグラデーション (上品な劣化) を念頭に置いて客観的に実証されています。    
 
 これは絶えず更新または編集される文書であり、新しいアイデアは大歓迎です。貢献してください。     
 
@@ -38,7 +38,7 @@ HTML コンテンツの`lang`を定義すると、スクリーンリーダーな
 
 * [Email accessibility in action](https://emails.hteumeuleu.com/email-accessibility-in-action-f7f9d945cf67#1592)
 
-## Semantic text markup
+## セマンティックなマークアップ     
 
 電子メールの HTML コードは、可能な限り多くのセマンティックマークアップを使用する必要があります。`<h1>`から`<h6>`までの見出しの使用と、段落に`<p>`を使用することを強く推奨します。     
 
@@ -64,7 +64,7 @@ HTML コンテンツの`lang`を定義すると、スクリーンリーダーな
 </div>
 ```
 
-## Tables for layout
+## テーブルのレイアウト    
 
 プレゼンテーションテーブルは残念ながらまだ必要ですが、*Outlook*（Windowsの2007-2019）の場合のみです。アクセシビリティを向上させるために、すべてのプレゼンテーションテーブルには常に`role ="presentation"`属性を含める必要があります。    
 
@@ -94,7 +94,7 @@ HTML コンテンツの`lang`を定義すると、スクリーンリーダーな
 
 単一の`[if mso]`の条件式は、Word のレンダリングエンジン(Windowsでは2007年から2019年までの*Outlook*)を使用して Outlook のすべてのバージョンをターゲットにするには十分です。特に必要がない限り、Outlook のバージョンターゲティング(`[if mso gte 16]`等)の使用はお勧めしません。     
 
-## Make it work without `<style>`
+## `<style>`なしで機能させる    
 
 すべてのメールクライアントが`<style>`タグをサポートしているわけではありません。`<style>`タグのフィルタリングには次のものがあります。     
 
@@ -109,7 +109,7 @@ HTML コンテンツの`lang`を定義すると、スクリーンリーダーな
 
 * **Branding**. `<style>`のないメールは送信者のブランドを反映する必要があります。
 
-## Styles over attributes
+## HTML属性でのスタイル定義      
 
 HTML属性ではなくスタイルプロパティを使用することを推奨します。これにより、プレゼンテーションコードを複数の属性ではなく1つのスタイル属性にまとめることができます。いくつかの例外を除いて、`width`、`height`、`align`、` valign`、`border`、`color`、または`bgcolor`などの属性は避けてください。    
 
@@ -174,7 +174,7 @@ HTML属性ではなくスタイルプロパティを使用することを推奨�
 <td height="100">Lorem ipsum.</td>
 ```
 
-## Use `margin` or `padding` for spacing
+## 間隔の調整には`margin`または`padding`を使用する     
 
 要素の周囲または内部の間隔は、CSSの`margin`または`padding`プロパティを使用して調整する必要があります。空の`<td>`と複数の`<br>`は避けるべきです。      
 
@@ -210,7 +210,7 @@ HTML属性ではなくスタイルプロパティを使用することを推奨�
 
 1つの注意点として、*Outlook*(2007-2019年のWindows)では、`margin` と `background-color` の組み合わせの動作が CSS 仕様とは異なるということです。主に、背景色もマージン領域で表示されます。    
 
-## Don't split visuals
+## 画像を分割しない    
 
 画像を複数のファイルに分割しないでください。 これは以下の理由で重要です。     
 
@@ -219,7 +219,7 @@ HTML属性ではなくスタイルプロパティを使用することを推奨�
 * **WebKit** メール全体で CSS 変換を使用するときに、画像間に細い線を追加します。これは、小さな画面での応答のない電子メールのレンダリングを調整するために、多くの電子メールクライアントで使用されるテクニックです。Outlook.com の現在のバージョンでは、CSS変換を使用して、プレビューウィンドウ内の電子メールの表示を調整しています。Chrome または Safari では、[この例](https://cdn-images-1.medium.com/max/2400/1*2CHIjuhc9JSmpNjoSQl3aw.jpeg)のように、分割画像間に細い線が表示されます。   
 * **Shit happens**. メールクライアントまたはユーザー設定により、メールの外観が変更され、コンテンツが予想よりも大きくなり、画像の配置が変わる場合があります。 あなたは[これ](https://imgur.com/NhoEN)が起こることを望まないでしょう。
 
-## Support Outlook at 120 dpi
+## 120 dpiでOutlookをサポートする    
 
 特定の Windows 構成では、*Outlook*(2007-2019年のWindows)は電子メールに DPI スケーリングを適用します。 スケーリングの変更を防ぐには、次の3つのルールを適用する必要があります。    
 
@@ -255,12 +255,12 @@ HTML属性ではなくスタイルプロパティを使用することを推奨�
 
 * [Correcting Outlook DPI Scaling Issues](https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/) by Courtney Fantinato.
 
-## Acknowledgements
+## 謝辞    
 
 このガイドは、@mdoの[[コーディングガイド by @mdo](http://kia-king.com/code-guide/)、@necolasの[idiomatic-css/translations/ja-JP at master · necolas/idiomatic-css](https://github.com/necolas/idiomatic-css/tree/master/translations/ja-JP)、@bendcの[Frontend Guidelines](https://www.github.com/bendc/frontend-guidelines)、 Stack Overflow の[Email Guidelines](https://www.stackoverflow.design/email/guidelines/)の推奨事項に基づいて作成されています。      
 
-## License
 
-Rémi Parmentier (@HTeuMeuLeu)が作成した*Email Coding Guidelines*は、MITライセンスです。これは、このリポジトリ内のすべてのドキュメントと翻訳に適用されます。      
+## ライセンス
+Rémi Parmentier (@HTeuMeuLeu)が作成した*Email Coding Guidelines*は、MIT ライセンスです。これは、このリポジトリ内のすべてのドキュメントと翻訳に適用されます。      
 github.com/hteumeuleu/email-guidelinesでの作業に基づいています。       
 
