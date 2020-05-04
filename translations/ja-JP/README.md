@@ -1,6 +1,6 @@
 # Email Coding Guidelines
 
-このドキュメントは、HTML メールのコーディングに適用できるいくつかの原則に対処することを目的としています。各ガイドラインは、最新のメールクライアントに準拠し、その他のメールクライアントのグレースフルデグラデーション (上品な劣化) を念頭に置いて客観的に実証されています。    
+このドキュメントは、HTML メールのコーディングに適用できるいくつかの原則に対処することを目的としています。各ガイドラインは、最新のメールクライアントに準拠し、その他のメールクライアントのグレイスフルデグラデーション (上品な劣化) を念頭に置いて客観的に実証されています。    
 
 これは絶えず更新または編集される文書であり、新しいアイデアは大歓迎です。貢献してください。     
 
@@ -66,7 +66,7 @@ HTML コンテンツの`lang`を定義すると、スクリーンリーダーな
 
 ## テーブルのレイアウト    
 
-プレゼンテーションテーブルは残念ながらまだ必要ですが、*Outlook*（Windowsの2007-2019）の場合のみです。アクセシビリティを向上させるために、すべてのプレゼンテーションテーブルには常に`role ="presentation"`属性を含める必要があります。    
+プレゼンテーションテーブルは残念ながらまだ必要ですが、*Outlook*（2007-2019年のWindows）の場合のみです。アクセシビリティを向上させるために、すべてのプレゼンテーションテーブルには常に`role ="presentation"`属性を含める必要があります。    
 
 ```html
 <!-- Good example -->
@@ -98,16 +98,16 @@ HTML コンテンツの`lang`を定義すると、スクリーンリーダーな
 
 すべてのメールクライアントが`<style>`タグをサポートしているわけではありません。`<style>`タグのフィルタリングには次のものがあります。     
 
- * **Permanent**. たとえば、Gmail以外のアカウント(*GANGA*とも呼ばれる)を使用する(iOSおよびAndroid上の)Gmail アプリは、`<style>`タグをサポートしません。この挙動となるMailアカウントは、[Libero](http://www.libero.it/mail/)(イタリア)、[Mail.ru](https://mail.ru/)または[Yandex](https://mail.yandex.com/)(ロシア)、[Nate])(http://home.mail.nate.com/)または[Naver])(https://mail.naver.com/)(韓国)、[T‑online](https://freemail.t-online.de/)(ドイツ)、[Telstra](https://www.my.telstra.com.au/) (オーストラリア)、または[Terra](https://mail.terra.com.br/)(ブラジル)です。     
-* **Temporary**. 昨年、Gmail は1日に少なくとも2回（[2019/04/23](https://twitter.com/TaxiforEmail/status/1120645381669494785)と[2018/07/13](https://twitter.com/HTeuMeuLeu/status/1017741221182263296)に)`<style>`タグを削除しました。
-* **Contextual**. Gmail のデスクトップウェブメールでメールを転送すると、すべての `<style>`タグが削除されます。 Gmail は、メールが*クリップされていない*バージョンで表示されたときに `<style>`タグを削除することでも知られています。(参照: [Gmail removes `<style>` tags in non clipped view](https://github.com/hteumeuleu/email-bugs/issues/56))
-* **Buggy**. Android の Yahoo アプリは、ページの最初の`<head>`内の`<style>`タグを削除します。(参照：[Yahoo! Mail app for Android strips styles from the first `<head>` tag](https://github.com/hteumeuleu/email-bugs/issues/28))
+ * **恒久的なもの**. たとえば、Gmail以外のアカウント(*GANGA*とも呼ばれる)を使用する(iOSおよびAndroid上の)Gmail アプリは、`<style>`タグをサポートしません。この挙動となるMailアカウントは、[Libero](http://www.libero.it/mail/)(イタリア)、[Mail.ru](https://mail.ru/)または[Yandex](https://mail.yandex.com/)(ロシア)、[Nate](http://home.mail.nate.com/)または[Naver](https://mail.naver.com/)(韓国)、[T‑online](https://freemail.t-online.de/)(ドイツ)、[Telstra](https://www.my.telstra.com.au/)(オーストラリア)、[Terra](https://mail.terra.com.br/)(ブラジル)です。     
+* **一時的なもの**. 昨年、Gmail は1日に少なくとも2回（[2019/04/23](https://twitter.com/TaxiforEmail/status/1120645381669494785)と[2018/07/13](https://twitter.com/HTeuMeuLeu/status/1017741221182263296)に)`<style>`タグを削除しました。
+* **使用コンテキストによるもの**. Gmail のデスクトップウェブメールでメールを転送すると、すべての `<style>`タグが削除されます。 Gmail は、メールが*クリップされていない*バージョンで表示されたときに `<style>`タグを削除することでも知られています。(参照: [Gmail removes `<style>` tags in non clipped view](https://github.com/hteumeuleu/email-bugs/issues/56))
+* **バグによるもの**. Android の Yahoo アプリは、ページの最初の`<head>`内の`<style>`タグを削除します。(参照：[Yahoo! Mail app for Android strips styles from the first `<head>` tag](https://github.com/hteumeuleu/email-bugs/issues/28))  
 
 `<style>`を使用しないで*メールを作成する*ことには、さまざまな意味があります。しかし、何よりもまず以下を考えます。
 
-* **Layout**. `<style>`のない電子メールは、水平スクロールなしで任意の幅に調整する必要があります。通常、iPhone SEの Gmail で表示されるメールの幅を反映して、幅 280px をまで狭くすることを検討します。　　　　　
+* **レイアウト**. `<style>`のない電子メールは、水平スクロールなしで任意の幅に調整する必要があります。通常、iPhone SEの Gmail で表示されるメールの幅を反映して、幅 280px をまで狭くすることを検討します。
 
-* **Branding**. `<style>`のないメールは送信者のブランドを反映する必要があります。
+* **ブランディング**. `<style>`のないメールは送信者のブランドを反映する必要があります。
 
 ## HTML属性でのスタイル定義      
 
