@@ -16,7 +16,7 @@ The HTML5 doctype is clean, short and easy to remember. It's used by a vast majo
 </html>
 ```
 
-**See also:**_
+**See also:**
 
 * [Which doctype should you use in HTML emails?](https://emails.hteumeuleu.com/which-doctype-should-you-use-in-html-emails-cd323fdb793c)
 
