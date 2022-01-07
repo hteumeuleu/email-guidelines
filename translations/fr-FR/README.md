@@ -2,11 +2,11 @@
 
 Ce document a pour but de présenter plusieurs principes que vous pouvez appliquer pour coder des e‑mails HTML. Chaque recommandation est objectivement justifiée pour se conformer aux clients de messagerie modernes, et se dégrader gracieusement ailleurs.
 
-Ce document est un document évolutif et toute nouvelle idée est la bienvenue. Votre participation est la bienvenue.
+Ce document est un document évolutif et toute nouvelle idée est la bienvenue. N’hésitez pas à contribuer.
 
 ## Doctype HTML5
 
-Le doctype HTML5 est propre, court and facile à mémoriser. Il est utilisé par une vaste majorité de clients de messagerie, donc votre code en héritera quoi qu'il arrive. Gardez cependant en tête que certains autres clients de messagerie peuvent utiliser d'autres doctypes and que votre e‑mail peut finir affiché en [mode quirks](https://developer.mozilla.org/fr/docs/Web/HTML/Quirks_Mode_and_Standards_Mode).
+Le doctype HTML5 est propre, court et facile à mémoriser. Il est utilisé par une vaste majorité de clients de messagerie, donc votre code en héritera quoi qu'il arrive. Gardez cependant en tête que certains autres clients de messagerie peuvent utiliser d'autres doctypes et que votre e‑mail peut finir affiché en [mode quirks](https://developer.mozilla.org/fr/docs/Web/HTML/Quirks_Mode_and_Standards_Mode).
 
 ```html
 <!DOCTYPE html>
